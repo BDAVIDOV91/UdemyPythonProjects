@@ -9,4 +9,4 @@ def resize_images(directory):
             resized_image = cv2.resize(image, (100, 100))
             cv2.imwrite(filepath, resized_image)
 
-resize_images("Path/to/directory"")
+resize_images('/home/Desktop/')
