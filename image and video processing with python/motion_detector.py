@@ -1,13 +1,20 @@
-import cv2
-import time
+import cv2, time, pandas
+from datetime import datetime
 
 first_frame = None
+status_list = [None, None]
+times = []
+
+#adding info in the csv file via pandas
+df = pandas.DataFrame(columns = ['Start', 'End'])
+
 
 # index give the camera option on your pc or video path
 video = cv2.VideoCapture(0)
 
 while True:
     check, frame = video.read()
+    status = 0
 
     #converting the picture GRAY and blurry in two windows
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -27,12 +34,21 @@ while True:
     (cnts,_) = cv2.findContours(thresh_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
     for contour in cnts:
-        if cv2.contourArea(contour) < 1000:
+        if cv2.contourArea(contour) < 10000:
             continue
+        status = 1
+        
         
         #building rectangle in the frame
         (x, y, w, h) = cv2.boundingRect(contour)
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 3) 
+    
+    status_list.append(status)
+    
+    if status_list[-1] == 1 and status_list[-2] == 0:
+        times.append(datetime.now())
+    if status_list[-1] == 0 and status_list[-2] == 1:
+        times.append(datetime.now())
            
         
     #appearing for the frames
@@ -44,8 +60,20 @@ while True:
     key = cv2.waitKey(1)
     #use 'q' key to break
     if key == ord('q'):
+        if status == 1:
+            times.append(datetime.now())
         break
 
+
+print(status_list)
+print(times)
+
+#adding the information in csv file via pandas
+for i in range (0, len(times), 2):
+    df = df.append({'Start':times[i], 'End':times[i+1]}, ignor_index = True)
+    
+#save directory
+df.to_csv('Times.csv')
     
 video.release()
 cv2.destroyAllWindows
