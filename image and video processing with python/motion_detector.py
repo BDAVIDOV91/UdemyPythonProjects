@@ -70,7 +70,7 @@ print(times)
 
 #adding the information in csv file via pandas
 for i in range (0, len(times), 2):
-    df = df.append({'Start':times[i], 'End':times[i+1]}, ignor_index = True)
+    df = df.append({'Start':times[i], 'End':times[i+1]}, ignore_index = True)
     
 #save directory
 df.to_csv('Times.csv')
