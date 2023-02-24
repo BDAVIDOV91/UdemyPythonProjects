@@ -4,19 +4,20 @@ from datetime import datetime
 first_frame = None
 status_list = [None, None]
 times = []
+data_to_append = []
 
-#adding info in the csv file via pandas
+# adding info in the csv file via pandas
 df = pandas.DataFrame(columns = ['Start', 'End'])
-
 
 # index give the camera option on your pc or video path
 video = cv2.VideoCapture(0)
 
+# This is the main runtime loop.
 while True:
     check, frame = video.read()
     status = 0
 
-    #converting the picture GRAY and blurry in two windows
+    # converting the picture GRAY and blurry in two windows
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
     
@@ -24,8 +25,8 @@ while True:
         first_frame = gray
         continue
     
-    #creating the different frames
-    delta_frame = cv2. absdiff(first_frame, gray)
+    # creating the different frames
+    delta_frame = cv2.absdiff(first_frame, gray)
     
     thresh_frame = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]
     
@@ -39,7 +40,7 @@ while True:
         status = 1
         
         
-        #building rectangle in the frame
+        # building rectangle in the frame
         (x, y, w, h) = cv2.boundingRect(contour)
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 3) 
     
@@ -51,14 +52,14 @@ while True:
         times.append(datetime.now())
            
         
-    #appearing for the frames
+    # appearing for the frames
     cv2.imshow('Capturing', gray)
     cv2.imshow('Delta Frame', delta_frame)
     cv2.imshow('Threshold Frame', thresh_frame)
     cv2.imshow('Color Frame', frame)
 
     key = cv2.waitKey(1)
-    #use 'q' key to break
+    # use 'q' key to break
     if key == ord('q'):
         if status == 1:
             times.append(datetime.now())
@@ -68,11 +69,14 @@ while True:
 print(status_list)
 print(times)
 
-#adding the information in csv file via pandas
-for i in range (0, len(times), 2):
-    df = df.append({'Start':times[i], 'End':times[i+1]}, ignore_index = True)
+# adding the information in csv file via pandas
+for i in range(0, len(times), 2):
+        data_to_append.append({'Start': times[i], 'End': times[i+1]})
+
+df = pandas.concat([df, pandas.DataFrame(data_to_append)], ignore_index=True)
+
     
-#save directory
+# save directory
 df.to_csv('Times.csv')
     
 video.release()
