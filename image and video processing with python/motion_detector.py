@@ -71,7 +71,7 @@ print(times)
 
 # adding the information in csv file via pandas
 for i in range(0, len(times), 2):
-        data_to_append.append({'Start': times[i], 'End': times[i+1]})
+    data_to_append.append({'Start': times[i], 'End': times[i+1]})
 
 df = pandas.concat([df, pandas.DataFrame(data_to_append)], ignore_index=True)
 
