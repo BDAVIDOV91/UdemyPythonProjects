@@ -27,8 +27,6 @@ p.yaxis.major_label_text_font_size = '12pt'
 p.xaxis.major_label_text_font = 'Verdana'
 p.yaxis.major_label_text_font = 'Verdana'
 
-p.circle(df["Temperature"],df["Pressure"],size=0.5)
-
 # Save and show the plot.
 output_file('Weather Graphs.html')
 show(p)
