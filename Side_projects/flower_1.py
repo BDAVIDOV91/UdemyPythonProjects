@@ -15,6 +15,13 @@ for j in range (25):
         tur.circle(200-j*4, 90)
         tur.right(180)
         tur.circle(50, 24)
+        
+# Add text under the flower
+tur.penup()
+tur.goto(0, -370)
+tur.pendown()
+tur.color('Red')
+tur.write("I love Aleks", align='center', font=('Arial', 20, 'bold'))
 
 tur.hideturtle()
 tur.done()
