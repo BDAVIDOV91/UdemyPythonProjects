@@ -21,7 +21,7 @@ tur.penup()
 tur.goto(0, -370)
 tur.pendown()
 tur.color('Red')
-tur.write("I love Aleks", align='center', font=('Arial', 20, 'bold'))
+tur.write("I Love You, Aleks", align='center', font=('Arial', 20, 'bold'))
 
 tur.hideturtle()
 tur.done()
