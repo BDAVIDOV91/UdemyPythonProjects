@@ -2,14 +2,13 @@ import justpy as jp
 import pandas
 from datetime import datetime
 from pytz import utc
-import matplotlib.pyplot as plt
+
 
 data = pandas.read_csv('reviews.csv', parse_dates = ['Timestamp'])
-data['Day'] = data['Timestamp'].dt.date
-day_average = data.groupby(['Day']).mean()
+data['Week'] = data['Timestamp'].dt.strftime('%Y %U')
+week_average = data.groupby(['Week']).mean()
 
-
-chart_def = """
+chart_def  = """
 {
   chart: {
     type: 'spline',
@@ -17,20 +16,20 @@ chart_def = """
   },
   title: {
     text: 'Atmosphere Temperature by Altitude',
-    align: 'center'
+    align: 'left'
   },
   subtitle: {
     text: 'According to the Standard Atmosphere Model',
-    align: 'center'
+    align: 'left'
   },
   xAxis: {
     reversed: false,
     title: {
       enabled: true,
-      text: 'Date'
+      text: 'Altitude'
     },
     labels: {
-      format: '{value}'
+      format: '{value} km'
     },
     accessibility: {
       rangeDescription: 'Range: 0 to 80 km.'
@@ -40,10 +39,10 @@ chart_def = """
   },
   yAxis: {
     title: {
-      text: 'Average Rating'
+      text: 'Temperature'
     },
     labels: {
-      format: '{value}'
+      format: '{value}°'
     },
     accessibility: {
       rangeDescription: 'Range: -90°C to 20°C.'
@@ -55,7 +54,7 @@ chart_def = """
   },
   tooltip: {
     headerFormat: '<b>{series.name}</b><br/>',
-    pointFormat: '{point.x} {point.y}'
+    pointFormat: '{point.x} km: {point.y}°C'
   },
   plotOptions: {
     spline: {
@@ -65,7 +64,7 @@ chart_def = """
     }
   },
   series: [{
-    name: 'Average Rating',
+    name: 'Temperature',
     data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
       [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
   }]
@@ -74,13 +73,13 @@ chart_def = """
 
 def app():
     wp = jp.QuasarPage()
-    h1 = jp.QDiv(a = wp, text = "Analysis of Course Reviews", classes = 'text-h3 text-center q-pa-md')
+    h1 = jp.QDiv(a = wp, text = "Analysis of Course Reviews", classes = 'text-h1 text-center q-pa-md')
     p1 = jp.QDiv(a = wp, text = "These graphs represent course review analysis")
+    
     hc = jp.HighCharts(a = wp, options = chart_def)
-    hc.options.title.text = "Average Rating by Day"
-
-    hc.options.xAxis.catergories = list(day_average.index)
-    hc.options.series[0].data = list(day_average['Rating'])
+    hc.options.xAxis.cateries = list(week_average.index)
+    hc.options.series[0].data = list(week_average['Rating'])
+    
     return wp
 
 jp.justpy(app)
