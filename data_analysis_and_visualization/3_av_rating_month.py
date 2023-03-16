@@ -3,12 +3,14 @@ import pandas
 from datetime import datetime
 from pytz import utc
 
-
+# Read data from CSV file and parse the 'Timestamp' column as datetime
 data = pandas.read_csv('reviews.csv', parse_dates = ['Timestamp'])
+# Add a new column 'Month' to group reviews by month
 data['Month'] = data['Timestamp'].dt.strftime('%Y %m')
+# Calculate the average rating per month using groupby()
 month_average = data.groupby(['Month']).mean()
 
-
+# Define the chart options in a JSON string
 chart_def = """
 {
   chart: {
@@ -72,15 +74,24 @@ chart_def = """
 }
 """
 
+# Define the main app function
 def app():
+      # Create a new Quasar page
     wp = jp.QuasarPage()
+    # Add a header and a paragraph to the page
     h1 = jp.QDiv(a = wp, text = "Analysis of Course Reviews", classes = 'text-h1 text-center q-pa-md')
     p1 = jp.QDiv(a = wp, text = "These graphs represent course review analysis")
     
+     # Add a HighCharts component to the page with the options defined in chart_def
     hc = jp.HighCharts(a = wp, options = chart_def)
+
+    # Update the x-axis categories and series data to display the monthly average ratings
+
     hc.options.xAxis.cateries = list(month_average.index)
     hc.options.series[0].data = list(month_average['Rating'])
     
+    # Return the Quasar page
     return wp
 
+# Start the JustPy server and pass the app function as a parameter
 jp.justpy(app)
