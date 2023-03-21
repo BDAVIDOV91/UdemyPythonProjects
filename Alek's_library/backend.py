@@ -1,5 +1,6 @@
 import sqlite3
 
+# Creating the database for the librbary for each button
 def connect():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
@@ -49,5 +50,5 @@ connect()
 #insert()
 #delete(5)
 #update(1, 'Astrophysics for People in a Hurry', ' Neil deGrasse Tyson ', 2017, 'Yes')
-print(view())
+#print(view())
 #print(search())
