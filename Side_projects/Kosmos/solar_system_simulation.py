@@ -72,7 +72,7 @@ v_saturn = np.array([9.69e3, 0, 0])
 v_uranus = np.array([0, 6.80e3, 0])
 v_neptune = np.array([5.43e3, 0, 0])
 
-a_earth = np.array([-x_earth, -y_earth, -z_earth]).reshape(3, 1)
+# a_earth = np.array([-x_earth, -y_earth, -z_earth]).reshape(3, 1)
 
 
 fig = plt.figure()
