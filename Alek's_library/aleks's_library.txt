@@ -1,0 +1,15 @@
+""""
+A virtual book library information:
+Title, Author
+Year, Read or Not
+
+User can:
+
+View all records
+Search an entry
+Add entry
+Update entry
+Delete
+Close
+
+"""
