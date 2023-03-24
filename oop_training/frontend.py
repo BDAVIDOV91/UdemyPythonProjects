@@ -1,7 +1,7 @@
 from tkinter import *
 from backend import Database
 
-database = Database()
+database = Database('books.db')
 # Connecting the fronend with the database
 def get_selected_row(event):
     global selected_tuple
