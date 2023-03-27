@@ -9,7 +9,8 @@ class LoginScreen(Screen):
         self.manager.current = 'sign_up_screen'
 
 class SignUpScreen(Screen):
-    pass
+    def add_user(self, uname, pword):
+        pass
 
 class RootWidged(ScreenManager):
     pass
