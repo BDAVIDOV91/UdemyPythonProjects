@@ -20,8 +20,13 @@ class SignUpScreen(Screen):
         users[uname] = {'username' : uname, 
                         'password' : pword,
                         'created' : datetime.now().strftime('%Y-%m-%d %H-%M-%S')}
+        
         with open('users.json', 'w') as file:
             json.dump(users, file)
+        self.manager.current = 'sign_up_screen_success'
+        
+class SignUpScreenSuccess(Screen):
+    pass
             
 class RootWidged(ScreenManager):
     pass
