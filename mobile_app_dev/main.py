@@ -28,7 +28,7 @@ class RootWidget(ScreenManager):
 # Define the SignUpScreen class, which inherits from kivy.uix.screenmanager.Screen
 class SignUpScreen(Screen):
     def add_user(self, uname, pword):
-        with  open('users.json') as file:    # Open the users.json file
+        with open('users.json') as file:    # Open the users.json file
             users = json.load(file)     # Load the user data from the file
             
         users[uname] = {'username' : uname, 
@@ -51,7 +51,7 @@ class LoginScreenSuccess(Screen):
         self.manager.transition.direction = 'right'    # Set the transition direction
         self.manager.current = 'login_screen'    # Switch to the login screen
     
-    def get_quotes(self, feel):
+    def get_quote(self, feel):
         feel = feel.lower()
         available_feelings = glob.glob('quotes/*txt')    # Get all available .txt files in the 'quotes' directory
         
