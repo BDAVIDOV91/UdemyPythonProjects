@@ -1,6 +1,9 @@
+# Login Screen Widget
 <LoginScreen>:
+    # This is a grid layout with 1 column
     GridLayout:
         cols: 1
+        # This is another grid layout with 1 column for the login form
         GridLayout:
             cols: 1
             Label:
@@ -17,16 +20,16 @@
             Label:
                 id: login_wrong
                 text: ''
-
+        # This is another grid layout with 2 columns for additional options
         GridLayout:
             cols: 2
             Button:
                 text: 'Forgot password?'
-               
             Button:
                 text: 'Sign up'
                 on_press: root.sign_up()
 
+# Sign Up Screen Widget
 <SignUpScreen>:
     GridLayout:
         cols: 1
@@ -42,6 +45,7 @@
             text: 'Sign In'
             on_press: root.add_user(root.ids.username.text, root.ids.password.text)
 
+# Sign Up Screen Success Widget
 <SignUpScreenSuccess>:
     GridLayout:
         cols: 1
@@ -51,6 +55,7 @@
             text: 'Login page'
             on_press: root.go_to_login()
 
+# Login Screen Success Widget
 <LoginScreenSuccess>:
     GridLayout:
         cols: 1
@@ -68,6 +73,8 @@
         Label:
             id: quote
             text: ''
+
+# Root Widget that contains all other widgets
 <RootWidged>:
     LoginScreen:
         name: 'login_screen'
