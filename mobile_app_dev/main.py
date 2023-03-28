@@ -4,36 +4,56 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 import json
 from datetime import datetime
 
-Builder.load_file('design.kv')
+Builder.load_file('design.kv') # Load the .kv file for the app's UI design
 
-
+# Define the LoginScreen class, which inherits from kivy.uix.screenmanager.Screen
 class LoginScreen(Screen):
     def sign_up(self):
-        self.manager.current = 'sign_up_screen'
+        self.manager.current = 'sign_up_screen' # Switch to the sign up screen
+        
+    def login(self, uname, pword):
+        with open('users.json') as file: # Open the users.json file
+            users = json.load(file) # Load the user data from the file
+        if uname in users and users [uname]['password'] == pword: # Check if the username and password match the data
+            self.manager.current = 'login_screen_success' # Switch to the login success screen if the login is successful
+        else:
+            self.ids.login_wrong.text = 'Wrong Username or Password !' # Dsplay an error message if the login fails
 
-
+# Define the SignUpScreen class, which inherits from kivy.uix.screenmanager.Screen
 class SignUpScreen(Screen):
     def add_user(self, uname, pword):
-        with  open('users.json') as file:
-            users = json.load(file)
+        with  open('users.json') as file: # Open the users.json file
+            users = json.load(file) # Load the user data from the file
             
         users[uname] = {'username' : uname, 
                         'password' : pword,
-                        'created' : datetime.now().strftime('%Y-%m-%d %H-%M-%S')}
+                        'created' : datetime.now().strftime('%Y-%m-%d %H-%M-%S')} # Add the new user to the data dictionary
         
-        with open('users.json', 'w') as file:
+        with open('users.json', 'w') as file: # Write the updated user data to the file
             json.dump(users, file)
-        self.manager.current = 'sign_up_screen_success'
+        self.manager.current = 'sign_up_screen_success' # Switch to the sign up success screen
         
+# Define the SignUpScreenSuccess class, which inherits from kivy.uix.screenmanager.Screen
 class SignUpScreenSuccess(Screen):
-    pass
+    def go_to_login(self):
+        self.manager.transition.direction = 'right' # Set the transition direction
+        self.manager.current = 'login_screen' # Switch to the login screen
             
-class RootWidged(ScreenManager):
+# Define the LoginScreenSuccess class, which inherits from kivy.uix.screenmanager.Screen
+class LoginScreenSuccess(Screen):
+    def log_out(self):
+        self.manager.transition.direction = 'right' # Set the transition direction
+        self.manager.current = 'login_screen' # Switch to the login screen
+        
+# Define the RootWidget class, which inherits from kivy.uix.screenmanager.ScreenManager
+class RootWidget(ScreenManager):
     pass
 
+# Define the MainApp class, which inherits from kivy.app.App
 class MainApp(App):
     def build(self):
-        return RootWidged()
+        return RootWidget() # Build and return the root widget for the app
 
+# If the file is run directly, create an instance of the MainApp class and run the app
 if __name__ == '__main__':
     MainApp().run()
