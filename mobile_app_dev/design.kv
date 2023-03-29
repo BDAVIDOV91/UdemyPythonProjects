@@ -3,30 +3,47 @@
     # This is a grid layout with 1 column
     GridLayout:
         cols: 1
+        padding: 15, 15
+        spacing: 20, 20
         # This is another grid layout with 1 column for the login form
         GridLayout:
             cols: 1
             Label:
                 text: 'User Login'
+                font_size: '20sp'
             TextInput:
                 id: username
                 hint_text: 'Username'
             TextInput:
                 id: password
+                password: True
                 hint_text: 'Password'
-            Button:
-                text: 'Login'
-                on_press: root.login(root.ids.username.text, root.ids.password.text)
+            RelativeLayout:    
+                Button:
+                    text: 'Login'
+                    on_press: root.login(root.ids.username.text, root.ids.password.text)
+                    size_hint: 0.3, 0,5
+                    pos_hint: {'center_x' : 0.5, 'center_y' : 0.6}
             Label:
                 id: login_wrong
                 text: ''
         # This is another grid layout with 2 columns for additional options
         GridLayout:
             cols: 2
+            size_hint: 0.2, 0.2
+            padding: 10, 10
+            spacing: 10, 0
             Button:
                 text: 'Forgot password?'
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7, 1, 1
             Button:
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7, 1, 1
                 text: 'Sign up'
+
                 on_press: root.sign_up()
 
 # Sign Up Screen Widget
