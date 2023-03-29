@@ -1,6 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.animation import Animation
 from hoverable import HoverBehavior
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
@@ -22,6 +23,8 @@ class LoginScreen(Screen):
         if uname in users and users [uname]['password'] == pword:    # Check if the username and password match the data
             self.manager.current = 'login_screen_success'    # Switch to the login success screen if the login is successful
         else:
+            anim = Animation(color = (0.6, 0.7, 0.1, 1))
+            anim.start(self.ids.login_wrong)
             self.ids.login_wrong.text = 'Wrong Username or Password !'    # Dsplay an error message if the login fails
 
 # Define the RootWidget class, which inherits from kivy.uix.screenmanager.ScreenManager
