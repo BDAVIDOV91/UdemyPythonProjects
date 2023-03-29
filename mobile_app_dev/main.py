@@ -1,6 +1,9 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from hoverable import HoverBehavior
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 import json, glob
 from datetime import datetime
 from pathlib import Path
@@ -55,7 +58,8 @@ class LoginScreenSuccess(Screen):
         feel = feel.lower()
         available_feelings = glob.glob('quotes/*txt')    # Get all available .txt files in the 'quotes' directory
         
-        available_feelings = [Path(filename).stem for filename in available_feelings]    # Get the stem of each filename (i.e. the filename without the extension)
+        available_feelings = [Path(filename).stem for filename in 
+                              available_feelings]    # Get the stem of each filename (i.e. the filename without the extension)
         
         if feel in available_feelings:
             with open(f'quotes/{feel}.txt') as file:    # Open the file containing the quotes for the given feeling
@@ -63,6 +67,9 @@ class LoginScreenSuccess(Screen):
             self.ids.quote.text = random.choice(quotes)    # Choose a random quote from the file and display it
         else:
             self.ids.quote.text = 'Try another feeling'     # Display an error message if the given feeling does not   
+        
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
+    pass        
         
 # Define the MainApp class, which inherits from kivy.app.App
 class MainApp(App):

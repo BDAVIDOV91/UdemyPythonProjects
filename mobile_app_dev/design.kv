@@ -49,7 +49,9 @@
 # Sign Up Screen Widget
 <SignUpScreen>:
     GridLayout:
-        cols: 1
+        cols: 
+        padding: 20, 20
+        spacing: 20, 20
         Label:
             text: 'Sign up for space journey !'
         TextInput:
@@ -76,9 +78,14 @@
 <LoginScreenSuccess>:
     GridLayout:
         cols: 1
-        Button:
-            text: 'Logout'
-            on_press: root.log_out()
+        padding: 30, 30
+        spacing: 30, 30
+        RelativeLayout:
+            ImageButton:
+                on_press: root.log_out()
+                source: 'logout_hover.png' if self.hovered else 'logout_nothover.png'
+                size_hint: 0.35, 0.35
+                pos_hint: {'center_x' : 0.93, 'center_y' : 0.8}
         Label:
             text: 'How do you feel ?'
         TextInput:
