@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-
+# Set up the Flask app and SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres123@localhost/hight_collector'
 db = SQLAlchemy(app)
 
+# Define the model
 class Data(db.Model):
     __tablename__ = 'data'
-    id = db.Column(db.Integer, prinary_key = True)
+    id = db.Column(db.Integer, primary_key = True)
     email_ = db.Column(db.String(120), unique = True)
     height_ = db.Column(db.Integer)
     
