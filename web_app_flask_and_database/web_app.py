@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Set up the Flask app and SQLAlchemy
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres123@localhost/hight_collector'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bobby:test123@172.17.0.1:5432/default'
 db = SQLAlchemy(app)
 
 # Define the model
@@ -25,10 +25,10 @@ def index():
 def success():
     if request.method == 'POST':
         email = request.form['email_name']
-        height =request.form['height_name']
+        height = request.form['height_name']
         print(email, height)
         return render_template('success.html')
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', port=5001)
