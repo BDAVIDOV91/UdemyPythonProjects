@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 
 def send_email(email, height):
     from_email = 'bgtscerebrate@gmail.com'
-    from_password = 'kfeilaeubbjbbmim'
+    from_password = 'password'
     to_email = email
     
     subject = 'Height data'
