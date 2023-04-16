@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <body>
-        This is the homepage!
+        {% for post in post_list %}
+            <h2>{{post.title}}</h2>
+            <p>{{post.author}}</p>
+        {% endfor %}
     </body>
 </html>

@@ -8,5 +8,10 @@ class BlogView(generic.DetailView):
     template_name = 'blog.html'
     
 
-class HomeView(generic.TemplateView):
+class AboutView(generic.TemplateView):
+    template_name = 'about.html'
+
+
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status = 1).order_by('-date_created')
     template_name = 'index.html'
