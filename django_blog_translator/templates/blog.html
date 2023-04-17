@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <body>
+{% extends 'base.html' %}
+{% block content %}
         <h1>{{object.title}}</h1>
         <p>{{object.content}}</p>
         <p>{{object.author}}</p>
-    </body>
-</html>
+{% endblock content %}
