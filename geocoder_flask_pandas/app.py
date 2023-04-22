@@ -23,7 +23,7 @@ def success_table():
 
 @app.route('/download-file/')
 def download():
-    return send_file(attachment_file = 'yourfile.csv', as_attachment = True)
+    return send_file('upload/geocoded.csv', attachment_file = 'yourfile.csv', as_attachment = True)
 
 if __name__== '__main__':
     app.run(debug = True, port = 5005)
