@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html len = 'en'>
-<title> Bobby's Geocoder </title>
+<html lang = "en">
+<title> Legit Geocoder </title>
 <head>
-    <link href = '../static/main.css' rel = 'stylesheet'>  
+  <link href = "../static/main.css" rel = "stylesheet">
 </head>
-    <body>
-        <div classs = 'container'>
-            <h1>Bobby's Geocoder</h1>
-            <h3>Please upload your CSV file.The values containing addresses should be in a column named <em>address</em> or <em>Address</em></h3>
-                <form action = "{{url_for('success_table')}}" method = 'POST' enctype = 'multipart/form-data'>
-                    <input type = 'file' accept = '.csv' name = 'file' />
-                    <button type = 'submit'> Submit </button>
-                </form>
-            <div class = 'output'>
-                
-            </div>
-        </div>
-    </body>
+  <body>
+    <div class = "container">
+      <h1>Legit Geocoder</h1>
+      <h3>Please upload your CSV file. The values containing addresses should be in a column named <em>address</em> or <em>Address</em></h3>
+        <form action = "{{url_for('success_table')}}" method = "POST" enctype = "multipart/form-data">
+          <input type = "file" accept = ".csv" name = "file" />
+          <button type = "submit"> Submit </button>
+        </form>
+      <div class = "output">
+        {{text|safe}}
+
+      </div>
+    </div>
+  </body>
 </html>
