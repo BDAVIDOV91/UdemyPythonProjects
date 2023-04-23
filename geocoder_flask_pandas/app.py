@@ -4,9 +4,13 @@ import pandas as pd
 import datetime
 import os
 
-app = Flask(__name__)
 
 upload_directory = os.path.abspath('uploads')
+if not os.path.exists(upload_directory):
+    os.makedirs(upload_directory)
+
+app = Flask(__name__)
+filename = None
 
 @app.route('/')
 def index():
@@ -30,12 +34,17 @@ def success_table():
             return render_template('index.html', text = df_coordinates.to_html(), btn = 'download.html')
         except Exception as e:
             return render_template("index.html", text=str(e))
+    return render_template("index.html")
 
-@app.route('/download/<filename>')
-def download_file(filename):
-    print("Download function called with filename:", filename)
-
-    return send_from_directory(directory = upload_directory, filename = filename.split('/')[-1], as_attachment = True)
-
+@app.route('/download')
+def download():
+    global filename
+    if filename is not None:
+        file_path = os.path.join(upload_directory, filename)
+        print('File path', file_path)
+        return send_from_directory(directory = upload_directory, path = file_path, filename = filename, as_attachment = True)
+    else:
+        return 'Error: File not found'
+    
 if __name__== '__main__':
     app.run(debug = True, port = 5005) # In my case port :5000 was busy so we can switch ports
