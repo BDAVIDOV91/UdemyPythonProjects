@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang = "en">
-<div class = "download">
-<a href = "{{url_for('download')}} "target = "blank"> <button class = "btn">  Download </button></a>
-</div>
+    <body>
+        <div class="download">
+            {% if filename %}
+                <p>{{ filename }}</p>
+                <a href="{{ url_for('download_file', filename=filename) }}" target="_blank" class="btn btn-primary">Download</a>
+            {% endif %}
+        </div>
+    </body>
 </html>
