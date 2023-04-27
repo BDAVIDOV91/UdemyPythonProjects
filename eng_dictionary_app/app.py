@@ -29,4 +29,10 @@ def translate(word):
 
 word = input('Enter word: ')
 
-print(translate(word))
+output = translate(word)
+
+if isinstance(output, list):
+    # Join the list elements into a single string with newlines
+    output = "\n".join(output)
+
+print(output)
