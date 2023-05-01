@@ -1,0 +1,21 @@
+127.0.0.1	localhost
+127.0.1.1	TechnoJihad
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+127.0.0.1 www.facebook.com
+127.0.0.1 facebook.com
+127.0.0.1 www.youtube.com
+127.0.0.1 youtube.com
+127.0.0.1 netflix.com
+127.0.0.1 disneyplus.com
+127.0.0.1 hbomax.com
+127.0.0.1 zoro.to
+127.0.0.1 www.netflix.com
+127.0.0.1 www.disneyplus.com
+127.0.0.1 www.hbomax.com
+127.0.0.1 www.zoro.to
