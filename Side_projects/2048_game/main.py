@@ -16,7 +16,7 @@ def add_tile():
     if empty_cells:
         i, j = random.choice(empty_cells)
         grid[i][j] = random.choice([2, 4])
-        
+
 # Function to transpose the grid
 def transpose():
     global grid
@@ -38,7 +38,7 @@ def compress():
                 new_grid[i][pos] = grid[i][j]
                 pos += 1
     grid = new_grid
-    
+
 # Function to merge tiles in the grid
 def merge():
     global grid
@@ -60,13 +60,13 @@ def update_screen():
 def main():
     # Initialize the grid with one tile
     add_tile()
-    
+
     while True:
         update_screen()
-        
+
         # Get user input
         key = stdscr.getch()
-        
+
         if key == curses.KEY_UP:
             transpose()
             compress()
@@ -91,19 +91,19 @@ def main():
             merge()
             compress()
             reverse()
-        
+
         add_tile()
-        
+
         # Check if the game is over
         game_over = all(grid[i][j] != 0 for i in range(4) for j in range(4))
         if game_over:
             stdscr.addstr("\nGame Over!")
             stdscr.refresh()
             break
-        
-# Run the game 
+
+# Run the game
 if __name__ == '__main__':
     main()
-    
+
 # Clean up the curses
 curses.endwin()
