@@ -29,4 +29,24 @@ def reverse():
 
 # Function to compress the grid by moving tiles to the left
 def compress():
+    global grid
+    new_grid = [[0 for _ in range(4)] for _ in range(4)]
+    for i in range(4):
+        pos = 0
+        for j in range(4):
+            if grid[i][j] != 0:
+                new_grid[i][j][pos] = grid[i][j]
+                pos += 1
+    grid = new_grid
+    
+# Function to merge tiles in the grid
+def merge():
+    pass
+
+# Function to update the game screen
+def update_screen():
+    pass
+
+# Main game loop
+def main():
     pass
