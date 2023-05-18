@@ -41,11 +41,20 @@ def compress():
     
 # Function to merge tiles in the grid
 def merge():
-    pass
+    global grid
+    for i in range(4):
+        for j in range(3):
+            if grid[i][j] == grid[i][j + 1] and grid[i][j] != 0:
+                grid[i][j] *= 2
+                grid[i][j + 1] = 0
 
 # Function to update the game screen
 def update_screen():
-    pass
+    stdscr.erase()
+    stdscr.addstr("2048\n\n")
+    for row in grid:
+        stdscr.addstr(' '.join(str(cell) if cell != 0 else '-' for cell in row) + '\n')
+    stdscr.refresh()
 
 # Main game loop
 def main():
