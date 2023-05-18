@@ -11,7 +11,7 @@ stdscr.timeout(100)
 grid = [[0 for _ in range(4)] for _ in range(4)]
 
 # Function to add a new random title (2 or 4) to the grid
-def add_title():
+def add_tile():
     empty_cells = [(i, j) for i in range(4) for j in range(4) if grid[i][j] == 0]
     if empty_cells:
         i, j = random.choice(empty_cells)
