@@ -10,7 +10,7 @@ stdscr.timeout(100)
 # Set up the grid
 grid = [[0 for _ in range(4)] for _ in range(4)]
 
-# Function to add a new random title (2 or 4) to the grid
+# Function to add a new random tile (2 or 4) to the grid
 def add_tile():
     empty_cells = [(i, j) for i in range(4) for j in range(4) if grid[i][j] == 0]
     if empty_cells:
@@ -35,7 +35,7 @@ def compress():
         pos = 0
         for j in range(4):
             if grid[i][j] != 0:
-                new_grid[i][j][pos] = grid[i][j]
+                new_grid[i][pos] = grid[i][j]
                 pos += 1
     grid = new_grid
     
@@ -58,8 +58,7 @@ def update_screen():
 
 # Main game loop
 def main():
-    # Initialize the grid
-    add_tile()
+    # Initialize the grid with one tile
     add_tile()
     
     while True:
@@ -102,7 +101,7 @@ def main():
             stdscr.refresh()
             break
         
-# Rune the game 
+# Run the game 
 if __name__ == '__main__':
     main()
     
