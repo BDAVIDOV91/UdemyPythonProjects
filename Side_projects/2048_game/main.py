@@ -58,4 +58,53 @@ def update_screen():
 
 # Main game loop
 def main():
-    pass
+    # Initialize the grid
+    add_tile()
+    add_tile()
+    
+    while True:
+        update_screen()
+        
+        # Get user input
+        key = stdscr.getch()
+        
+        if key == curses.KEY_UP:
+            transpose()
+            compress()
+            merge()
+            compress()
+            transpose()
+        elif key == curses.KEY_DOWN:
+            transpose()
+            reverse()
+            compress()
+            merge()
+            compress()
+            reverse()
+            transpose()
+        elif key == curses.KEY_LEFT:
+            compress()
+            merge()
+            compress()
+        elif key == curses.KEY_RIGHT:
+            reverse()
+            compress()
+            merge()
+            compress()
+            reverse()
+        
+        add_tile()
+        
+        # Check if the game is over
+        game_over = all(grid[i][j] != 0 for i in range(4) for j in range(4))
+        if game_over:
+            stdscr.addstr("\nGame Over!")
+            stdscr.refresh()
+            break
+        
+# Rune the game 
+if __name__ == '__main__':
+    main()
+    
+# Clean up the curses
+curses.endwin()
