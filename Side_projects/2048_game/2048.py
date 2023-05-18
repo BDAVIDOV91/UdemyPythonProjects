@@ -19,8 +19,14 @@ def add_title():
         
 # Function to transpose the grid
 def transpose():
-    pass
+    global grid
+    grid = [list(row) for row in zip(*grid)]
 
 # Function to reverse the grid
 def reverse():
+    global grid
+    grid = [row[::-1] for row in grid]
+
+# Function to compress the grid by moving tiles to the left
+def compress():
     pass
