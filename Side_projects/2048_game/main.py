@@ -92,8 +92,6 @@ def main():
             compress()
             reverse()
 
-        add_tile()
-
         # Check if the game is over
         game_over = all(grid[i][j] != 0 for i in range(4) for j in range(4))
         if game_over:
@@ -101,9 +99,12 @@ def main():
             stdscr.refresh()
             break
 
+    # Clean up the curses
+    curses.endwin()
+
+# Add initial tile before the game loop starts
+add_tile()
+
 # Run the game
 if __name__ == '__main__':
     main()
-
-# Clean up the curses
-curses.endwin()
