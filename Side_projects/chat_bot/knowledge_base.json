@@ -47,6 +47,10 @@
     {
       "question": "what about astronomy",
       "answer": "What do you wanna know about : Stars, Planets, Comets , etc or the real deal like Black Wholes , Magnetars, Neutron stars, Galaxies , Nebulas, Star clusters etc... ?"
+    },
+    {
+      "question": "do you know me",
+      "answer": "Yes... You are Bobby ."
     }
   ]
 }
