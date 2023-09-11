@@ -74,7 +74,7 @@ for dirname in os.listdir(path):
 face_recognizer.train(face_images, np.array(labels))
 
 # Load images uploaded by user
-image_filenames = ['labeled_images/001.jpg']
+image_filenames = ['labeled_images/114.jpg']
 
 for filename in image_filenames:
     # Load image
