@@ -22,9 +22,10 @@ character = pygame.Rect(screen_width // 2 - 50, screen_height - 50, 100, 10)
 ball = pygame.Rect(random.randint(0, screen_width - 20), 0, 20, 20)
 
 # Initialize variables
-character_speed = 5
+character_speed = 10
 ball_speed = 5
 score = 0
+missed_balls = 0
 font = pygame.font.Font(None, 36)
 
 # Game loop
@@ -46,6 +47,17 @@ while True:
 
     if ball.top > screen_height:
         ball = pygame.Rect(random.randint(0, screen_width - 20), 0, 20, 20)
+        missed_balls += 1
+
+        if missed_balls == 5:
+            game_over_text = font.render("Game Over", True, white)
+            score_text = font.render("Final Score: " + str(score), True, white)
+            screen.blit(game_over_text, (screen_width // 2 - 100, screen_height // 2 - 20))
+            screen.blit(score_text, (screen_width // 2 - 100, screen_height // 2 + 20))
+            pygame.display.flip()
+            pygame.time.delay(2000)  # Display the game over screen for 2 seconds
+            pygame.quit()
+            sys.exit()
 
     if character.colliderect(ball):
         ball = pygame.Rect(random.randint(0, screen_width - 20), 0, 20, 20)
@@ -54,6 +66,11 @@ while True:
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, white, character)
     pygame.draw.ellipse(screen, red, ball)
+    
+    # Display missed ball tracker in the upper right corner
+    missed_balls_text = font.render("Missed: " + str(missed_balls), True, white)
+    screen.blit(missed_balls_text, (screen_width - 150, 10))
+    
     score_text = font.render("Score: " + str(score), True, white)
     screen.blit(score_text, (10, 10))
     pygame.display.flip()
