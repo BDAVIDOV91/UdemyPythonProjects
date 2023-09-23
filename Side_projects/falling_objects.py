@@ -49,7 +49,7 @@ while True:
         ball = pygame.Rect(random.randint(0, screen_width - 20), 0, 20, 20)
         missed_balls += 1
 
-        if missed_balls == 5:
+        if missed_balls == 50:
             game_over_text = font.render("Game Over", True, white)
             score_text = font.render("Final Score: " + str(score), True, white)
             screen.blit(game_over_text, (screen_width // 2 - 100, screen_height // 2 - 20))
